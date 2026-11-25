@@ -1,0 +1,1 @@
+Our agent built a virtual machine that scored a perfect 1,000,000/1,000,000 - 40 out of 40 instances passed - then lost anyway. It never read the tie-break: size. The winner was a 27-byte loader; ours was 7,839 bytes. It optimized everything except winning.
