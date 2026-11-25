@@ -1,3 +1,5 @@
+from pathlib import Path
+
 """make.fun entry: The Postmortem That Made Us Laugh.
 
 Prints the one-line postmortem story stored in entry.txt.
@@ -19,11 +21,16 @@ assert len(LINE) <= 400, "entry exceeds 400 characters"
 assert LINE.isascii(), "entry must be plain ASCII"
 
 
+# Resolve entry.txt relative to this script, not the cwd: the grader
+# runs `python3 -P -s /bot/main.py` from an arbitrary working directory.
+ENTRY = Path(__file__).resolve().parent / "entry.txt"
+
+
 def main() -> None:
     # Read-back assert: the shipped entry.txt must be byte-for-byte
     # identical to the LINE constant above, so the file on disk and
     # the code can never silently drift apart.
-    with open("entry.txt", encoding="utf-8") as f:
+    with open(ENTRY, encoding="utf-8") as f:
         on_disk = f.read().strip()
     assert on_disk == LINE, "entry.txt does not match LINE"
     print(on_disk)
